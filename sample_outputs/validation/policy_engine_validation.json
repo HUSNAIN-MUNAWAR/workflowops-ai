@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "passed": true,
+  "approval_decision": {
+    "allowed": true,
+    "requires_approval": true,
+    "reason": "Invoice amount 5000.0 exceeds approval threshold 1000.0.",
+    "matched_rules": [
+      "invoice_approval_threshold"
+    ],
+    "required_roles": [
+      "admin",
+      "reviewer"
+    ],
+    "risk_level": "medium",
+    "recommended_action": "request_approval"
+  },
+  "block_decision": {
+    "allowed": false,
+    "requires_approval": true,
+    "reason": "Prompt injection indicator detected; action blocked/quarantined by policy.",
+    "matched_rules": [
+      "risk_review_threshold",
+      "prompt_injection_action_mode"
+    ],
+    "required_roles": [
+      "admin",
+      "reviewer"
+    ],
+    "risk_level": "high",
+    "recommended_action": "block"
+  }
+}

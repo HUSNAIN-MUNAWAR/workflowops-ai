@@ -1,0 +1,7 @@
+Tender: Supplier Document Automation
+Deadline: 2026-10-15
+Supplier shall automate BOQ spreadsheet review and document checklist creation.
+Mandatory certificate: tax registration certificate.
+Mandatory certificate: safety compliance certificate.
+The vendor must support approval workflows and exception reporting.
+Bank guarantee may be requested for award.

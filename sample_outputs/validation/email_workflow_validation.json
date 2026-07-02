@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "workflow_status": "completed",
+  "risk_score": 34.0,
+  "task": {
+    "task_title": "Review support_attachment automation output",
+    "department": "Support",
+    "status": "open"
+  },
+  "checks": [
+    "classified email-like input",
+    "created task",
+    "generated approval-safe draft path"
+  ]
+}

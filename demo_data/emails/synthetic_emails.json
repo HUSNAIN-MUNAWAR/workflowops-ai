@@ -1,0 +1,242 @@
+[
+  {
+    "id": "EMAIL-001",
+    "sender": "demo1@example.com",
+    "company": "Company 1",
+    "subject": "Invoice for April services",
+    "body": "Please process attached invoice Total: USD 2200 due tomorrow.",
+    "deadline": "2026-08-01"
+  },
+  {
+    "id": "EMAIL-002",
+    "sender": "demo2@example.com",
+    "company": "Company 2",
+    "subject": "Angry customer refund request",
+    "body": "I am angry and need refund today or I will escalate legal.",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-003",
+    "sender": "demo3@example.com",
+    "company": "Company 3",
+    "subject": "Login bug",
+    "body": "Users cannot login and support SLA may breach.",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-004",
+    "sender": "demo4@example.com",
+    "company": "Company 4",
+    "subject": "RFP proposal request",
+    "body": "We invite your company to submit proposal for automation tender.",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-005",
+    "sender": "demo5@example.com",
+    "company": "Company 5",
+    "subject": "HR leave policy",
+    "body": "Please confirm HR leave approval process.",
+    "deadline": "2026-08-01"
+  },
+  {
+    "id": "EMAIL-006",
+    "sender": "demo6@example.com",
+    "company": "Company 6",
+    "subject": "Partnership opportunity",
+    "body": "Interested in partnership for workflow automation.",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-007",
+    "sender": "demo7@example.com",
+    "company": "Company 7",
+    "subject": "Lottery unsubscribe",
+    "body": "Congratulations lottery winner unsubscribe",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-008",
+    "sender": "demo8@example.com",
+    "company": "Company 8",
+    "subject": "Invoice for April services",
+    "body": "Please process attached invoice Total: USD 2200 due tomorrow.",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-009",
+    "sender": "demo9@example.com",
+    "company": "Company 9",
+    "subject": "Angry customer refund request",
+    "body": "I am angry and need refund today or I will escalate legal.",
+    "deadline": "2026-08-01"
+  },
+  {
+    "id": "EMAIL-010",
+    "sender": "demo10@example.com",
+    "company": "Company 10",
+    "subject": "Login bug",
+    "body": "Users cannot login and support SLA may breach.",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-011",
+    "sender": "demo11@example.com",
+    "company": "Company 11",
+    "subject": "RFP proposal request",
+    "body": "We invite your company to submit proposal for automation tender.",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-012",
+    "sender": "demo12@example.com",
+    "company": "Company 12",
+    "subject": "HR leave policy",
+    "body": "Please confirm HR leave approval process.",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-013",
+    "sender": "demo13@example.com",
+    "company": "Company 13",
+    "subject": "Partnership opportunity",
+    "body": "Interested in partnership for workflow automation.",
+    "deadline": "2026-08-01"
+  },
+  {
+    "id": "EMAIL-014",
+    "sender": "demo14@example.com",
+    "company": "Company 14",
+    "subject": "Lottery unsubscribe",
+    "body": "Congratulations lottery winner unsubscribe",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-015",
+    "sender": "demo15@example.com",
+    "company": "Company 15",
+    "subject": "Invoice for April services",
+    "body": "Please process attached invoice Total: USD 2200 due tomorrow.",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-016",
+    "sender": "demo16@example.com",
+    "company": "Company 16",
+    "subject": "Angry customer refund request",
+    "body": "I am angry and need refund today or I will escalate legal.",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-017",
+    "sender": "demo17@example.com",
+    "company": "Company 17",
+    "subject": "Login bug",
+    "body": "Users cannot login and support SLA may breach.",
+    "deadline": "2026-08-01"
+  },
+  {
+    "id": "EMAIL-018",
+    "sender": "demo18@example.com",
+    "company": "Company 18",
+    "subject": "RFP proposal request",
+    "body": "We invite your company to submit proposal for automation tender.",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-019",
+    "sender": "demo19@example.com",
+    "company": "Company 19",
+    "subject": "HR leave policy",
+    "body": "Please confirm HR leave approval process.",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-020",
+    "sender": "demo20@example.com",
+    "company": "Company 20",
+    "subject": "Partnership opportunity",
+    "body": "Interested in partnership for workflow automation.",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-021",
+    "sender": "demo21@example.com",
+    "company": "Company 21",
+    "subject": "Lottery unsubscribe",
+    "body": "Congratulations lottery winner unsubscribe",
+    "deadline": "2026-08-01"
+  },
+  {
+    "id": "EMAIL-022",
+    "sender": "demo22@example.com",
+    "company": "Company 22",
+    "subject": "Invoice for April services",
+    "body": "Please process attached invoice Total: USD 2200 due tomorrow.",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-023",
+    "sender": "demo23@example.com",
+    "company": "Company 23",
+    "subject": "Angry customer refund request",
+    "body": "I am angry and need refund today or I will escalate legal.",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-024",
+    "sender": "demo24@example.com",
+    "company": "Company 24",
+    "subject": "Login bug",
+    "body": "Users cannot login and support SLA may breach.",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-025",
+    "sender": "demo25@example.com",
+    "company": "Company 25",
+    "subject": "RFP proposal request",
+    "body": "We invite your company to submit proposal for automation tender.",
+    "deadline": "2026-08-01"
+  },
+  {
+    "id": "EMAIL-026",
+    "sender": "demo26@example.com",
+    "company": "Company 26",
+    "subject": "HR leave policy",
+    "body": "Please confirm HR leave approval process.",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-027",
+    "sender": "demo27@example.com",
+    "company": "Company 27",
+    "subject": "Partnership opportunity",
+    "body": "Interested in partnership for workflow automation.",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-028",
+    "sender": "demo28@example.com",
+    "company": "Company 28",
+    "subject": "Lottery unsubscribe",
+    "body": "Congratulations lottery winner unsubscribe",
+    "deadline": null
+  },
+  {
+    "id": "EMAIL-029",
+    "sender": "demo29@example.com",
+    "company": "Company 29",
+    "subject": "Invoice for April services",
+    "body": "Please process attached invoice Total: USD 2200 due tomorrow.",
+    "deadline": "2026-08-01"
+  },
+  {
+    "id": "EMAIL-030",
+    "sender": "demo30@example.com",
+    "company": "Company 30",
+    "subject": "Angry customer refund request",
+    "body": "I am angry and need refund today or I will escalate legal.",
+    "deadline": null
+  }
+]

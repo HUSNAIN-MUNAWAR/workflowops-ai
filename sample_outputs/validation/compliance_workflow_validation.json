@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "workflow_status": "completed",
+  "fields": {
+    "control_id": "ISO-12.1"
+  },
+  "checks": [
+    "control id extraction",
+    "audit-safe task path",
+    "report generation path"
+  ]
+}

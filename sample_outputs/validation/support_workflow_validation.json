@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "workflow_status": "completed",
+  "risk_terms": [
+    "refund",
+    "angry",
+    "legal",
+    "vip",
+    "urgent"
+  ],
+  "risk_score": 54.0,
+  "checks": [
+    "support risk terms detected",
+    "human-safe notification stub",
+    "SLA/risk path available"
+  ]
+}

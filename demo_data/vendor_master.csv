@@ -1,0 +1,4 @@
+vendor_id,vendor_name,approved,currency,default_payment_terms
+V-001,Acme Supplies,true,USD,Net 30
+V-002,Gulf Office Systems,true,SAR,Net 45
+V-003,Northwind Software,false,USD,Manual Review

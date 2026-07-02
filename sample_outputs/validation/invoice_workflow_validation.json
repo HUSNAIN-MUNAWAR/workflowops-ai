@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "run_id": "e58366b3-0476-4ad3-a71f-f8755a585da7",
+  "workflow_status": "waiting_approval",
+  "risk_score": 57.2,
+  "approvals_created": 1,
+  "checks": [
+    "extracted invoice fields",
+    "approval gate triggered",
+    "database records written"
+  ]
+}

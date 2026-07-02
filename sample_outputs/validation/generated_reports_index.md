@@ -1,0 +1,25 @@
+# Generated Reports Index
+
+Status: **passed**
+
+## Reports Generated
+
+6
+
+## Reports
+
+- invoice_exception_report
+- rfp_compliance_matrix
+- compliance_evidence_pack
+- customer_escalation_summary
+- workflow_reliability_test_report
+- weekly_automation_operations_report
+
+## Paths
+
+- **invoice_exception_report**: {'json': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\invoice_exception_report.json', 'markdown': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\invoice_exception_report.md', 'html': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\invoice_exception_report.html', 'pdf': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\invoice_exception_report.pdf'}
+- **rfp_compliance_matrix**: {'json': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\rfp_compliance_matrix.json', 'markdown': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\rfp_compliance_matrix.md', 'html': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\rfp_compliance_matrix.html', 'pdf': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\rfp_compliance_matrix.pdf'}
+- **compliance_evidence_pack**: {'json': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\compliance_evidence_pack.json', 'markdown': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\compliance_evidence_pack.md', 'html': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\compliance_evidence_pack.html', 'pdf': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\compliance_evidence_pack.pdf'}
+- **customer_escalation_summary**: {'json': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\customer_escalation_summary.json', 'markdown': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\customer_escalation_summary.md', 'html': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\customer_escalation_summary.html', 'pdf': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\customer_escalation_summary.pdf'}
+- **workflow_reliability_test_report**: {'json': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\workflow_reliability_test_report.json', 'markdown': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\workflow_reliability_test_report.md', 'html': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\workflow_reliability_test_report.html', 'pdf': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\workflow_reliability_test_report.pdf'}
+- **weekly_automation_operations_report**: {'json': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\weekly_automation_operations_report.json', 'markdown': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\weekly_automation_operations_report.md', 'html': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\weekly_automation_operations_report.html', 'pdf': 'C:\\Users\\EliteBook\\Downloads\\workflowops-ai-final\\workflowops-ai\\sample_outputs\\reports\\weekly_automation_operations_report.pdf'}

@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "workflow_status": "completed",
+  "mandatory_requirements": [
+    "Company profile document",
+    "Security policy",
+    "pricing breakdown"
+  ],
+  "risk_score": 47.9,
+  "checks": [
+    "requirement extraction",
+    "task creation",
+    "compliance matrix placeholder export"
+  ]
+}

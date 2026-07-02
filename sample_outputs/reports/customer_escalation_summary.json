@@ -1,0 +1,30 @@
+{
+  "input_files": [
+    "synthetic demo file(s)"
+  ],
+  "extracted_fields": {
+    "document_type": "synthetic demo"
+  },
+  "risk_score": 72,
+  "decisions_made": [
+    "Created task",
+    "Required approval when risk/action policy demanded it"
+  ],
+  "approval_history": [
+    "Pending/approved records are synthetic demo data"
+  ],
+  "audit_events": [
+    "workflow.run.created",
+    "approval.approved/rejected",
+    "report.downloaded"
+  ],
+  "recommendations": [
+    "Wire real business systems only after scoped security review"
+  ],
+  "limitations": [
+    "Synthetic validation only",
+    "Not certified accounting/legal/compliance software"
+  ],
+  "slug": "customer_escalation_summary",
+  "executive_summary": "High-risk support messages are summarized with recommended escalation."
+}

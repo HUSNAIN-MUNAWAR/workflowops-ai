@@ -1,0 +1,23 @@
+[
+  {
+    "id": "EV-1",
+    "title": "Security policy reviewer approval",
+    "type": "approval_record",
+    "summary": "CISO approved security policy review",
+    "date": "2026-06-15"
+  },
+  {
+    "id": "EV-2",
+    "title": "GitHub pull request for configuration change",
+    "type": "pr_log",
+    "summary": "Infrastructure configuration reviewed in pull request",
+    "date": "2026-06-20"
+  },
+  {
+    "id": "EV-3",
+    "title": "CI test log for release",
+    "type": "ci_log",
+    "summary": "CI tests passed for release branch",
+    "date": "2026-06-21"
+  }
+]

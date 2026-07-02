@@ -1,0 +1,8 @@
+RFP: Governed Workflow Automation Platform
+Deadline: 2026-09-01
+The vendor must provide a secure workflow automation platform.
+The solution shall include human approval before external emails and payment exports.
+Mandatory certificate: ISO 27001 certificate or equivalent security policy evidence.
+The proposal must include implementation plan, support SLA, and data residency approach.
+Risk clause: unlimited liability for data loss.
+Risk clause: liquidated damages for late delivery.
