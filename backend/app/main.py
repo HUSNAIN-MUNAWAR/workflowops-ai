@@ -18,7 +18,7 @@ async def lifespan(_app: FastAPI):
         finally: db.close()
     yield
 
-app=FastAPI(title=settings.app_name,version="3.0.0",description="Governed AI workflow automation platform - portfolio-grade synthetic demo with persisted DAG workflows, policies, connectors and audit logs.", lifespan=lifespan)
+app=FastAPI(title=settings.app_name,version="3.0.0",description="Governed AI workflow automation platform with persisted DAG workflows, policy controls, connectors, audit logs, and synthetic demo data for local validation.", lifespan=lifespan)
 origins=[x.strip() for x in settings.allowed_origins.split(',') if x.strip()]+(["*"] if settings.environment=="local" else [])
 app.add_middleware(CORSMiddleware,allow_origins=origins,allow_credentials=True,allow_methods=["*"],allow_headers=["*"])
 @app.middleware("http")

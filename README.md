@@ -1,4 +1,4 @@
-# WorkflowOps AI — Governed AI Workflow Automation Platform
+# WorkflowOps AI — Governed Workflow Automation Platform
 
 [![CI](https://github.com/HUSNAIN-MUNAWAR/workflowops-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/HUSNAIN-MUNAWAR/workflowops-ai/actions/workflows/ci.yml)
 [![Architecture](https://img.shields.io/badge/Architecture-Mermaid-blue)](#architecture)
@@ -6,20 +6,13 @@
 [![Live%20Screens](https://img.shields.io/badge/Live%20Screens-Playwright-blue)](#live-browser-screens)
 [![Technical%20Deep%20Dive](https://img.shields.io/badge/Docs-Technical%20Deep%20Dive-blue)](docs/technical_deep_dive.md)
 
-WorkflowOps AI is a **portfolio-grade governed automation platform** for turning messy business inputs - invoices, PDFs, RFPs, emails, tickets, policies, and SOP-style documents - into auditable, human-approved workflow runs.
+WorkflowOps AI is a governed automation platform for operations teams that need to turn invoices, emails, PDFs, RFPs, tickets, policies, and SOP-style documents into auditable workflow runs.
 
-This repository is designed to demonstrate senior-level AI automation engineering: persisted DAG execution, approval gates, tenant policy decisions, connector safety, reliability testing, document extraction, audit logs, metrics, reports, and a backend-connected Next.js dashboard.
+The stack combines document extraction, policy evaluation, approval gates, safe connector actions, reliability testing, reports, and a connected operator dashboard. The repository ships with synthetic business data and local-safe connector implementations so the full system can be run, tested, and demonstrated locally.
 
-> Honest scope: this is a serious portfolio-grade platform with synthetic demo data and production-style architecture. Real production use would require real connector security review, infrastructure hardening, compliance review, monitoring, tenant isolation review, and domain-specific validation.
+> Current scope: the repository is designed to be reproducible and honest. It includes connected demo data, real browser captures, persisted workflow state, and local validation paths. Production adoption would still require connector security review, secrets management, infrastructure hardening, monitoring, tenant isolation review, and domain-specific validation.
 
-## Who this is for
-
-- Remote AI automation and backend platform roles
-- Freelance/B2B automation demos for agencies and SMEs
-- Teams evaluating safe AI workflow patterns before connecting real tools
-- Portfolio reviewers who want to see more than a chatbot or generic Zapier clone
-
-## What makes it non-toy
+## Platform capabilities
 
 | Area | Implemented in this repo |
 |---|---|
@@ -27,15 +20,15 @@ This repository is designed to demonstrate senior-level AI automation engineerin
 | Background jobs | Local sync worker fallback plus RQ/Redis-ready queue interface and queue APIs |
 | Persistence | SQLAlchemy models, SQLite local default, PostgreSQL Docker config, Alembic migration scaffold |
 | Governance | RBAC, organization policy engine, approval thresholds, denied-action audit events |
-| Connectors | Safe local demo connectors for email, Slack-style notifications, sheets, CRM, accounting, webhook, file storage |
-| Reliability testing | `workflow_evalbench` with 25 synthetic safety and reliability scenarios, including honest demo gaps |
-| Document intelligence | PDF extraction, optional OCR fallback, invoice/RFP extraction rules, confidence/warnings, prompt injection detection |
-| Observability | Health/readiness/metrics endpoints, audit timeline, queue and connector metrics |
-| Frontend | Next.js pages connected to backend demo APIs for dashboard, runs, approvals, documents, reports, reliability, connectors, policies, builder |
+| Connectors | Safe local demo connectors for email, notifications, sheets, CRM, accounting, webhooks, and storage |
+| Reliability testing | `workflow_evalbench` with synthetic safety and resilience scenarios plus generated reports |
+| Document intelligence | PDF extraction, optional OCR fallback, invoice and RFP extraction rules, confidence warnings, prompt-injection detection |
+| Observability | Health, readiness, metrics, audit timeline, queue status, and connector metrics |
+| Frontend | Next.js workspace for dashboard, runs, approvals, templates, builder, reports, connectors, policies, reliability, and audit logs |
 
 ## Live browser screens
 
-The screenshots below are real Chromium captures from the running FastAPI + Next.js stack with synthetic connected demo data loaded through backend APIs.
+The screenshots below are real Chromium captures from the running FastAPI and Next.js stack with connected synthetic business data.
 
 | Dashboard | Approval queue |
 |---|---|
@@ -49,124 +42,70 @@ The screenshots below are real Chromium captures from the running FastAPI + Next
 
 ```mermaid
 flowchart LR
-  UI[Next.js Dashboard] --> API[FastAPI API]
-  API --> Auth[JWT + RBAC]
-  API --> Policy[Tenant Policy Engine]
-  API --> DAG[Persisted DAG Scheduler]
-  DAG --> Queue[Local Worker or RQ/Redis]
-  DAG --> Docs[Document Intelligence]
-  DAG --> LLM[Mock/OpenAI/Ollama Provider Layer]
-  DAG --> Conn[Safe Connector Registry]
-  DAG --> Reports[Report Generator]
-  API --> DB[(SQLite local / PostgreSQL Docker)]
-  DAG --> Audit[Audit Logs + Timeline]
-  API --> Metrics[/metrics]
+  ui["Next.js workspace"] --> api["FastAPI API"]
+  api --> auth["JWT and RBAC"]
+  api --> policy["Tenant policy engine"]
+  api --> orchestrator["Persisted DAG scheduler"]
+  orchestrator --> worker["Local worker or RQ and Redis"]
+  orchestrator --> docs["Document intelligence"]
+  orchestrator --> llm["Mock, OpenAI, or Ollama provider"]
+  orchestrator --> connectors["Safe connector registry"]
+  orchestrator --> reports["Report generator"]
+  api --> db["SQLite local or PostgreSQL"]
+  orchestrator --> audit["Audit log and timeline"]
+  api --> metrics["Metrics endpoint"]
 ```
 
-## DAG scheduler
+## Workflow lifecycle
 
 ```mermaid
 flowchart TD
-  A[created] --> B[queued]
-  B --> C[ingest_document]
-  C --> D[classify_document]
-  D --> E[extract_fields]
-  E --> F[validate_fields]
-  F --> G[score_risk]
-  G --> H{approval required?}
-  H -- yes --> I[waiting_for_approval]
-  I -- approved --> J[connector_action/export_report]
-  I -- rejected --> K[rejected or failed branch]
-  H -- no --> J
-  J --> L[completed]
-  C -. replay/cancel .-> M[replay or cancelled]
+  created["Created"] --> queued["Queued"]
+  queued --> ingest["Ingest document"]
+  ingest --> classify["Classify document"]
+  classify --> extract["Extract fields"]
+  extract --> validate["Validate fields"]
+  validate --> risk["Score risk"]
+  risk --> approval{"Approval required?"}
+  approval -- "Yes" --> waiting["Waiting for approval"]
+  waiting -- "Approved" --> action["Execute connector action"]
+  waiting -- "Rejected" --> rejected["Rejected or failed branch"]
+  approval -- "No" --> action
+  action --> complete["Completed"]
+  ingest -. "Replay or cancel" .-> replay["Replay or cancelled"]
 ```
 
-## Worker and queue
-
-```mermaid
-sequenceDiagram
-  participant UI as Frontend
-  participant API as FastAPI
-  participant Q as Queue Service
-  participant W as Worker
-  participant DB as Database
-  UI->>API: POST /workflow-runs/{id}/enqueue
-  API->>Q: enqueue_workflow_run(id)
-  Q->>DB: persist queue job
-  W->>DB: claim queued run
-  W->>DB: execute nodes, save snapshots
-  W->>DB: pause on approval or complete
-  UI->>API: poll timeline/status
-```
-
-## Connector safety model
-
-```mermaid
-flowchart LR
-  Node[connector_action node] --> Policy[Policy evaluation]
-  Policy --> Risk{High risk?}
-  Risk -- yes --> Approval[Human approval required]
-  Risk -- no --> DryRun[Dry-run allowed]
-  Approval --> Execute[Safe demo execution]
-  Execute --> LocalDB[(Local demo tables/files)]
-  Execute --> Audit[Connector audit event]
-  Policy -- blocked --> Block[Blocked + audit log]
-```
-
-## Policy engine
-
-```mermaid
-flowchart TD
-  Input[Workflow/action context] --> Org[Organization default policy]
-  Org --> Override[Workflow override if present]
-  Override --> Rules[Threshold, role, connector, risk, confidence, prompt injection rules]
-  Rules --> Decision[allowed / blocked / requires approval]
-  Decision --> Timeline[Timeline event + audit log]
-```
-
-## Reliability tester
-
-```mermaid
-flowchart TD
-  Template[Workflow template] --> Scenarios[25 synthetic scenarios]
-  Scenarios --> Sim[Simulation runner]
-  Sim --> Detect[Failure/policy detector]
-  Detect --> Replay[Replay evidence]
-  Replay --> Report[JSON/Markdown/HTML/PDF report]
-```
-
-## Data model ERD
+## Data model
 
 ```mermaid
 erDiagram
-  Organization ||--o{ User : has
-  Organization ||--o{ WorkflowTemplate : owns
-  WorkflowTemplate ||--o{ WorkflowRun : starts
-  WorkflowRun ||--o{ WorkflowStepRun : contains
-  WorkflowRun ||--o{ Task : creates
-  WorkflowRun ||--o{ ApprovalRequest : requests
-  WorkflowRun ||--o{ Report : generates
-  Document ||--o{ ExtractedField : has
-  WorkflowRun ||--o{ AuditLog : records
-  Organization ||--o{ OrganizationPolicy : governs
-  ReliabilityTestRun ||--o{ ReliabilityTestCaseResult : includes
-  ConnectorActionLog }o--|| Organization : scoped
+  ORGANIZATION ||--o{ USER : has
+  ORGANIZATION ||--o{ WORKFLOW_TEMPLATE : owns
+  WORKFLOW_TEMPLATE ||--o{ WORKFLOW_RUN : starts
+  WORKFLOW_RUN ||--o{ WORKFLOW_STEP_RUN : contains
+  WORKFLOW_RUN ||--o{ TASK : creates
+  WORKFLOW_RUN ||--o{ APPROVAL_REQUEST : requests
+  WORKFLOW_RUN ||--o{ REPORT : generates
+  DOCUMENT ||--o{ EXTRACTED_FIELD : has
+  WORKFLOW_RUN ||--o{ AUDIT_LOG : records
+  ORGANIZATION ||--o{ ORGANIZATION_POLICY : governs
+  RELIABILITY_TEST_RUN ||--o{ RELIABILITY_TEST_CASE_RESULT : includes
+  CONNECTOR_ACTION_LOG }o--|| ORGANIZATION : scoped
 ```
 
-## Deployment diagram
+## Deployment reference
 
 ```mermaid
 flowchart LR
-  Browser --> Nginx
-  Nginx --> Frontend[Next.js container]
-  Nginx --> Backend[FastAPI container]
-  Backend --> Worker[Worker container]
-  Backend --> Postgres[(PostgreSQL)]
-  Worker --> Postgres
-  Backend --> Redis[(Redis)]
-  Worker --> Redis
-  Backend --> Storage[Local demo storage]
+  browser["Browser"] --> proxy["Nginx"]
+  proxy --> web["Next.js container"]
+  proxy --> api["FastAPI container"]
+  api --> worker["Worker container"]
+  api --> db["PostgreSQL"]
+  worker --> db
+  api --> redis["Redis"]
+  worker --> redis
+  api --> storage["Local demo storage"]
 ```
 
 ## Quick start - local SQLite
@@ -194,18 +133,18 @@ Demo accounts:
 ## Main commands
 
 ```bash
-make install          # backend + frontend dependencies
-make db-upgrade      # Alembic upgrade
-make seed            # synthetic demo seed
-make dev             # FastAPI backend
-make worker          # local/RQ-ready worker
-make test            # backend tests
-make validate        # validation scripts
-make reports         # sample reports
-make screenshots     # data-derived preview screenshots
-make screenshots-live  # Playwright browser captures for README assets
-make frontend-check  # typecheck + build
-make e2e             # Playwright flow, requires browser tooling
+make install             # backend + frontend dependencies
+make db-upgrade          # Alembic upgrade
+make seed                # synthetic demo seed
+make dev                 # FastAPI backend
+make worker              # local or RQ-ready worker
+make test                # backend tests
+make validate            # validation scripts
+make reports             # sample reports
+make screenshots         # data-derived preview screenshots
+make screenshots-live    # Playwright browser captures for README assets
+make frontend-check      # typecheck + build
+make e2e                 # Playwright flow, requires browser tooling
 ```
 
 ## Docker
@@ -215,22 +154,22 @@ docker compose config
 docker compose up --build
 ```
 
-A production-style example is provided in `docker-compose.prod.example.yml` with Postgres, Redis, backend, worker, frontend, and nginx. It is an example, not a hardened production deployment.
+A production-style example is provided in `docker-compose.prod.example.yml` with Postgres, Redis, backend, worker, frontend, and nginx. It is an example deployment reference, not a hardened production stack.
 
 ## API surface
 
-The current FastAPI app exposes 52 OpenAPI paths across auth, dashboard, workflow templates, workflow runs, approvals, documents, reports, reliability tests, audit logs, policies, connectors, queue, health, readiness, and metrics.
+The FastAPI application covers auth, dashboard, workflow templates, workflow runs, approvals, documents, reports, reliability tests, audit logs, policies, connectors, queue status, health, readiness, and metrics.
 
 Key endpoints:
 
 - `POST /auth/login`, `GET /auth/me`
-- `POST /workflow-runs`, `POST /workflow-runs/{id}/enqueue`, `POST /workflow-runs/{id}/resume`, `POST /workflow-runs/{id}/replay`
-- `GET /approvals`, `POST /approvals/{id}/approve`, `POST /approvals/{id}/reject`
+- `GET /workflow-templates`, `POST /workflow-runs`, `POST /workflow-runs/{id}/enqueue`, `POST /workflow-runs/{id}/resume`, `POST /workflow-runs/{id}/replay`
+- `GET /approvals`, `POST /approvals/{id}/approve`, `POST /approvals/{id}/reject`, `POST /approvals/{id}/request-changes`
 - `GET /connectors`, `POST /connectors/{id}/actions/{name}/dry-run`, `POST /connectors/{id}/actions/{name}/execute`
 - `GET /policies/default`, `PUT /policies/default`, `POST /policies/evaluate`
 - `GET /metrics`, `GET /queue/status`, `GET /queue/failed-jobs`
 
-## Final validation evidence from this sandbox
+## Validation evidence from this workspace
 
 ```bash
 PYTHONPATH=backend pytest -q backend/tests
@@ -252,19 +191,19 @@ cd backend && DATABASE_URL=sqlite:////tmp/workflowops_alembic_test.db PYTHONPATH
 # passed
 
 cd frontend && npm run typecheck && npm run build
-# passed; 23 static routes generated
+# passed
 
 cd frontend && npm run e2e
-# passed; 3 Playwright tests
+# passed
 
 cd frontend && npm run screenshots:readme
-# passed; dashboard, approvals, reliability, and templates browser captures written
+# passed
 ```
 
 Generated outputs:
 
 - Reports: `sample_outputs/reports/`
-- Validation JSON/Markdown: `sample_outputs/validation/`
+- Validation JSON and Markdown: `sample_outputs/validation/`
 - Data-derived preview screenshots: `sample_outputs/screenshots/*_connected_demo.png`
 - Live browser screenshots: `sample_outputs/screenshots/*_live_browser.png`
 - PDF render check: `sample_outputs/pdf_render_check_final/`
@@ -282,7 +221,7 @@ Generated outputs:
 
 ## E2E status
 
-Playwright configuration and a passing browser E2E flow are included in `frontend/e2e/workflowops.spec.ts`. Real README screenshots are generated by `frontend/scripts/capture-readme-screenshots.mjs`.
+Playwright coverage is included in `frontend/e2e/workflowops.spec.ts`. The README screenshots are generated by `frontend/scripts/capture-readme-screenshots.mjs` against the running local stack.
 
 ```bash
 cd frontend
@@ -294,23 +233,23 @@ npm run screenshots:readme
 ## Limitations
 
 - All records and files are synthetic demo data.
-- `MockLLMProvider` is deterministic/rule-based; optional OpenAI/Ollama adapters are extension points.
-- Demo connectors write to local database/tables/files only. They do not send emails, payments, Slack messages, or real webhooks by default.
-- OCR is lightweight and depends on optional Tesseract/pdf tooling and document quality.
-- RQ/Redis worker path is included, but this sandbox validated local sync mode only.
-- Alembic migration is an initial portfolio migration based on SQLAlchemy metadata; production would need reviewed incremental migrations.
+- `MockLLMProvider` is deterministic and rule-based; optional OpenAI and Ollama adapters are extension points.
+- Demo connectors write to local database tables or files only. They do not send emails, payments, chat messages, or live webhooks by default.
+- OCR is lightweight and depends on optional Tesseract or PDF tooling plus document quality.
+- RQ and Redis worker support is included, but this workspace validated local sync mode.
+- Alembic migration coverage starts with an initial metadata migration and should be extended for long-lived production change management.
 - This is not certified accounting, legal, SOC 2, ISO 27001, or compliance software.
 
 ## Roadmap
 
 - Real connector OAuth flows and scoped credentials vault
-- Tenant isolation security review and row-level access hardening
-- Production-grade RQ worker orchestration and dead-letter dashboard
+- Tenant isolation hardening and deeper access-control review
+- Production-grade worker orchestration and dead-letter queue tooling
 - Incremental Alembic migrations with migration tests in CI
-- Playwright screenshots from a running local stack in CI
-- Better OCR/layout extraction with measured domain-specific validation
-- Cloud deployment reference with backup/restore and monitoring
+- Automated browser screenshot generation in CI from a running local stack
+- Improved OCR and layout extraction with measured domain validation
+- Cloud deployment reference with backup, restore, monitoring, and alerting
 
 ## Disclaimer
 
-WorkflowOps AI is not a certified compliance, accounting, legal, SOC 2, ISO 27001, or payment automation product. It is an honest, reproducible portfolio-grade engineering project showing how governed AI automation can be structured safely before production hardening.
+WorkflowOps AI demonstrates how governed AI automation can be structured with approvals, policies, auditability, and reliability checks before production hardening. It is not a certified compliance, accounting, legal, SOC 2, ISO 27001, or payment automation product.

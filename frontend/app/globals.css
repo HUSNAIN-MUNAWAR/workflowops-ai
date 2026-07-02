@@ -2,4 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-body { background: #f8fafc; color: #0f172a; }
+:root {
+  color-scheme: light;
+  --page-bg: #eef4f8;
+  --page-ink: #102033;
+  --panel-border: rgba(148, 163, 184, 0.22);
+  --panel-shadow: 0 28px 80px rgba(15, 23, 42, 0.08);
+  --panel-shadow-strong: 0 34px 110px rgba(15, 23, 42, 0.16);
+}
+
+html {
+  background: var(--page-bg);
+}
+
+body {
+  min-height: 100vh;
+  color: var(--page-ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(14, 165, 233, 0.12), transparent 34%),
+    radial-gradient(circle at top right, rgba(245, 158, 11, 0.12), transparent 26%),
+    linear-gradient(180deg, #f7fbfd 0%, #eef4f8 48%, #edf3f8 100%);
+}
+
+.font-display {
+  font-family: var(--font-display), var(--font-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: rgba(8, 145, 178, 0.18);
+  color: #082f49;
+}
+
+.surface-panel {
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid var(--panel-border);
+  box-shadow: var(--panel-shadow);
+  backdrop-filter: blur(18px);
+}
+
+.surface-panel-strong {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: var(--panel-shadow-strong);
+  backdrop-filter: blur(24px);
+}

@@ -1,3 +1,5 @@
 # Screenshots
 
-These PNGs are generated demo mockups for portfolio preview. They are clearly labeled as mock/demo visuals, not claimed browser captures. Run the frontend locally to capture real browser screenshots.
+These PNG assets support project documentation and demos.
+
+The live browser screenshots used in the root README are generated from the running local FastAPI and Next.js stack. Additional derived demo visuals in this folder should remain clearly labeled when they are not browser captures.

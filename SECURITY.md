@@ -1,6 +1,6 @@
 # Security Policy
 
-WorkflowOps AI is a portfolio-grade demo platform using synthetic data. Do not put real secrets, customer data, regulated documents, payment credentials, or production connector tokens into this repository.
+WorkflowOps AI uses synthetic data and local-safe connector behavior for demonstration and validation. Do not put real secrets, customer data, regulated documents, payment credentials, or production connector tokens into this repository.
 
 ## Implemented demo controls
 
@@ -17,7 +17,7 @@ WorkflowOps AI is a portfolio-grade demo platform using synthetic data. Do not p
 
 ## Reporting issues
 
-For a real open-source project, use GitHub security advisories or a private disclosure email. This packaged portfolio repo does not include a real disclosure mailbox.
+Use GitHub security advisories or the repository's standard private reporting path for sensitive issues. No dedicated production disclosure mailbox is published with this demo project.
 
 ## Production hardening required
 

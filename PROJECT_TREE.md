@@ -132,7 +132,6 @@
 - docs/connectors.md
 - docs/dag_scheduler.md
 - docs/deployment.md
-- docs/freelance_positioning.md
 - docs/limitations.md
 - docs/linkedin_post.md
 - docs/policy_engine.md
@@ -144,7 +143,6 @@
 - docs/screenshots/templates_mock.png
 - docs/security_model.md
 - docs/technical_deep_dive.md
-- docs/upwork_pitch.md
 - docs/use_case_catalog.md
 - docs/validation_report.md
 - docs/workflow_templates.md
@@ -172,6 +170,7 @@
 - frontend/app/templates/reliability/page.tsx
 - frontend/app/templates/rfp/page.tsx
 - frontend/app/templates/support/page.tsx
+- frontend/components/AutomationCanvas.tsx
 - frontend/components/Cards.tsx
 - frontend/components/Shell.tsx
 - frontend/components/WorkflowTimeline.tsx
@@ -216,10 +215,14 @@
 - sample_outputs/reports/workflow_reliability_test_report.pdf
 - sample_outputs/screenshots/README.md
 - sample_outputs/screenshots/approvals_connected_demo.png
+- sample_outputs/screenshots/approvals_live_browser.png
 - sample_outputs/screenshots/dashboard_connected_demo.png
+- sample_outputs/screenshots/dashboard_live_browser.png
 - sample_outputs/screenshots/dashboard_mock.png
 - sample_outputs/screenshots/reliability_connected_demo.png
+- sample_outputs/screenshots/reliability_live_browser.png
 - sample_outputs/screenshots/reliability_mock.png
+- sample_outputs/screenshots/templates_live_browser.png
 - sample_outputs/screenshots/templates_mock.png
 - sample_outputs/validation/background_worker_validation.json
 - sample_outputs/validation/background_worker_validation.md
