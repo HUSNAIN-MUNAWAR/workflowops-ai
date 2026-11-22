@@ -1,0 +1,150 @@
+{
+  "run_type": "workflowops_real_local_runtime_video",
+  "generated_at_utc": "2026-11-22T15:32:12.886937+00:00",
+  "command": "PYTHONPATH=backend py -3.12 -u scripts/generate_real_runtime_video.py",
+  "source": {
+    "path": "demo_data/animation/synthetic_invoice_approval.json",
+    "filename": "synthetic_invoice_INV-9001.txt",
+    "bytes": 264,
+    "sha256": "a4f49663c5e9d45d6681a0127bad26d6674d342e2cac8510995845b09482f4de",
+    "synthetic": true,
+    "action_type": "payment_export"
+  },
+  "model": {
+    "name": "workflowops-mock-provider",
+    "implementation": "backend/app/llm/mock_provider.py::MockLLMProvider",
+    "provider": "mock",
+    "deterministic": true,
+    "confidence": 0.82,
+    "claim_boundary": "Deterministic rule-based demo provider; not a production accuracy benchmark.",
+    "reference_output": {
+      "vendor_name": "Acme Supplies",
+      "invoice_number": "INV-9001",
+      "amount": 5000.0,
+      "currency": "USD",
+      "due_date": "2026-08-01",
+      "tax": 0.0,
+      "confidence": 0.78
+    },
+    "learned_checkpoint": null,
+    "interpretation": "MockLLMProvider is deterministic rule-based demo logic; no live LLM was called."
+  },
+  "workflow": {
+    "template": "invoice_approval",
+    "engine": "backend/app/workflows/engine.py::WorkflowEngine",
+    "gated_status": "waiting_approval",
+    "simulation_preview_status": "completed",
+    "gated_nodes_completed": 6,
+    "simulation_nodes_completed": 9,
+    "audit_event_names": [
+      "run_started",
+      "ingest",
+      "ingest",
+      "classify",
+      "classify",
+      "extract",
+      "extract",
+      "validate",
+      "validate",
+      "risk",
+      "risk",
+      "approval",
+      "approval"
+    ]
+  },
+  "engine_outputs": {
+    "extract": {
+      "node_id": "extract",
+      "status": "completed",
+      "output": {
+        "document_type": "invoice",
+        "fields": {
+          "invoice_number": "INV-9001",
+          "vendor": "Acme Supplies",
+          "currency": "USD",
+          "total": 5000.0
+        },
+        "confidence": 0.76,
+        "required_fields": [
+          "vendor",
+          "invoice_number",
+          "total",
+          "due_date"
+        ]
+      },
+      "attempts": 1
+    },
+    "validate": {
+      "node_id": "validate",
+      "status": "completed",
+      "output": {
+        "valid": false,
+        "missing_fields": [
+          "due_date"
+        ],
+        "field_count": 4
+      },
+      "attempts": 1
+    },
+    "risk": {
+      "node_id": "risk",
+      "status": "completed",
+      "output": {
+        "risk_score": 57.2,
+        "risk_level": "medium"
+      },
+      "attempts": 1
+    },
+    "approval": {
+      "node_id": "approval",
+      "status": "waiting_approval",
+      "output": {
+        "approval_required": true,
+        "approval": {
+          "title": "Approval required for workflow action",
+          "reason": "Risk score 57.2 or sensitive action payment_export",
+          "risk_score": 57.2,
+          "requested_by": "workflow_engine",
+          "reviewer_role": "reviewer",
+          "status": "pending",
+          "decision_reason": null
+        }
+      },
+      "attempts": 1
+    },
+    "connector_preview": {
+      "node_id": "export",
+      "status": "completed",
+      "output": {
+        "connector_id": "accounting_demo",
+        "action": "export_invoice",
+        "executed": false,
+        "dry_run": true
+      },
+      "attempts": 1
+    }
+  },
+  "runtime": {
+    "python": "3.12.10",
+    "opencv": "4.13.0",
+    "numpy": "2.5.1",
+    "platform": "Windows-11-10.0.22631-SP0",
+    "device": "cpu"
+  },
+  "outputs": {
+    "video": "docs\\animation\\runtime-evidence\\workflowops-runtime.mp4",
+    "poster": "docs\\animation\\runtime-evidence\\workflowops-runtime-poster.png",
+    "node_trace_csv": "docs\\animation\\runtime-evidence\\workflowops-node-trace.csv",
+    "sha256": {
+      "docs\\animation\\runtime-evidence\\workflowops-runtime.mp4": "8980cd69e4357d1c92242d78badba3f619ef98b3a6010abdf3d6edbba7acbb5c",
+      "docs\\animation\\runtime-evidence\\workflowops-runtime-poster.png": "65e8e4ca141ded2bc5a5d7835b95cac5ef3ab40f028819de4d37d82afa3b846b",
+      "docs\\animation\\runtime-evidence\\workflowops-node-trace.csv": "58856dce0c5255163b21bfb37790b257a84ee26df6d647403fa9ffdd3b2aa4b9"
+    }
+  },
+  "interpretation": [
+    "The MP4 is generated from the actual WorkflowEngine and MockLLMProvider execution over the checked-in synthetic invoice fixture.",
+    "The approval gate stopped the non-simulation run before connector execution.",
+    "The connector frame is a separate simulation preview with dry_run true and executed false.",
+    "This is not evidence of live LLM quality, payment execution, or production workflow accuracy."
+  ]
+}

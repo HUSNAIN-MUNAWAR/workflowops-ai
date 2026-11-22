@@ -48,6 +48,33 @@ PYTHONPATH=backend python scripts/generate_workflow_animation.py
 
 The source checksum, model reference, stable workflow outputs, and scene metrics are recorded in [`docs/animation/workflow_approval_sequence.json`](docs/animation/workflow_approval_sequence.json). The fixture and provider are synthetic/deterministic, and the connector preview is explicitly `dry_run`; no payment or external write is performed.
 
+### Real local runtime evidence
+
+The strict runtime trace executes the actual workflow engine and preserves its
+node outputs in a video, poster, CSV, and JSON report:
+
+```powershell
+$env:PYTHONPATH = "backend"
+py -3.12 -u scripts/generate_real_runtime_video.py
+# or: make runtime-evidence
+```
+
+Outputs:
+
+```text
+docs/animation/runtime-evidence/workflowops-runtime.mp4
+docs/animation/runtime-evidence/workflowops-runtime-poster.png
+docs/animation/runtime-evidence/workflowops-node-trace.csv
+docs/animation/runtime-evidence/workflowops-runtime-summary.json
+```
+
+The local path uses `MockLLMProvider`, a deterministic rule-based provider; no
+learned checkpoint or live LLM call is present. The report records the actual
+provider response, validation/risk/approval state, and connector preview. The
+non-simulation run stops at `waiting_approval`; the separate connector preview
+records `dry_run: true` and `executed: false`. This is not live payment,
+production LLM, or workflow-accuracy evidence.
+
 ## Architecture
 
 ```mermaid

@@ -1,0 +1,6 @@
+node_id,status,attempts,output_json
+extract,completed,1,"{""confidence"": 0.76, ""document_type"": ""invoice"", ""fields"": {""currency"": ""USD"", ""invoice_number"": ""INV-9001"", ""total"": 5000.0, ""vendor"": ""Acme Supplies""}, ""required_fields"": [""vendor"", ""invoice_number"", ""total"", ""due_date""]}"
+validate,completed,1,"{""field_count"": 4, ""missing_fields"": [""due_date""], ""valid"": false}"
+risk,completed,1,"{""risk_level"": ""medium"", ""risk_score"": 57.2}"
+approval,waiting_approval,1,"{""approval"": {""decision_reason"": null, ""reason"": ""Risk score 57.2 or sensitive action payment_export"", ""requested_by"": ""workflow_engine"", ""reviewer_role"": ""reviewer"", ""risk_score"": 57.2, ""status"": ""pending"", ""title"": ""Approval required for workflow action""}, ""approval_required"": true}"
+connector_preview,completed,1,"{""action"": ""export_invoice"", ""connector_id"": ""accounting_demo"", ""dry_run"": true, ""executed"": false}"
