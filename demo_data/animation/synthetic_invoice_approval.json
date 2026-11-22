@@ -1,0 +1,6 @@
+{
+  "fixture_id": "workflowops-invoice-approval-9001",
+  "filename": "synthetic_invoice_INV-9001.txt",
+  "action_type": "payment_export",
+  "text": "Invoice Number: INV-9001\nVendor: Acme Supplies\nTotal: USD 5000\nDue Date: 2026-08-01\nPayment requested"
+}

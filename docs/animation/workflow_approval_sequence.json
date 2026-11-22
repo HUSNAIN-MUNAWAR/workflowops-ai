@@ -1,0 +1,190 @@
+{
+  "engine_outputs": {
+    "approval": {
+      "attempts": 1,
+      "node_id": "approval",
+      "output": {
+        "approval": {
+          "decision_reason": null,
+          "reason": "Risk score 57.2 or sensitive action payment_export",
+          "requested_by": "workflow_engine",
+          "reviewer_role": "reviewer",
+          "risk_score": 57.2,
+          "status": "pending",
+          "title": "Approval required for workflow action"
+        },
+        "approval_required": true
+      },
+      "status": "waiting_approval"
+    },
+    "connector_preview": {
+      "attempts": 1,
+      "node_id": "export",
+      "output": {
+        "action": "export_invoice",
+        "connector_id": "accounting_demo",
+        "dry_run": true,
+        "executed": false
+      },
+      "status": "completed"
+    },
+    "extract": {
+      "attempts": 1,
+      "node_id": "extract",
+      "output": {
+        "confidence": 0.76,
+        "document_type": "invoice",
+        "fields": {
+          "currency": "USD",
+          "invoice_number": "INV-9001",
+          "total": 5000.0,
+          "vendor": "Acme Supplies"
+        },
+        "required_fields": [
+          "vendor",
+          "invoice_number",
+          "total",
+          "due_date"
+        ]
+      },
+      "status": "completed"
+    },
+    "risk": {
+      "attempts": 1,
+      "node_id": "risk",
+      "output": {
+        "risk_level": "medium",
+        "risk_score": 57.2
+      },
+      "status": "completed"
+    },
+    "validate": {
+      "attempts": 1,
+      "node_id": "validate",
+      "output": {
+        "field_count": 4,
+        "missing_fields": [
+          "due_date"
+        ],
+        "valid": false
+      },
+      "status": "completed"
+    }
+  },
+  "events": [
+    {
+      "detail": "The fixture enters the invoice approval workflow with an explicit payment-export intent.",
+      "id": "receive",
+      "metric": "synthetic_invoice_INV-9001.txt \u00b7 258 bytes",
+      "short": "Receive",
+      "status": "input",
+      "title": "Synthetic invoice received"
+    },
+    {
+      "detail": "The engine redacts sensitive-looking values and records prompt-injection findings before extraction.",
+      "id": "ingest",
+      "metric": "redaction boundary \u00b7 0 injection findings",
+      "short": "Ingest",
+      "status": "guarded",
+      "title": "Ingest and redact"
+    },
+    {
+      "detail": "The deterministic mock provider and repository extraction rules produce an invoice field proposal.",
+      "id": "extract",
+      "metric": "mock \u00b7 82% provider confidence",
+      "short": "Extract",
+      "status": "proposed",
+      "title": "Model reference + extraction"
+    },
+    {
+      "detail": "Validation catches the date-shaped value removed by the privacy boundary and keeps the workflow reviewable.",
+      "id": "validate",
+      "metric": "blocked field \u00b7 due_date missing",
+      "short": "Validate",
+      "status": "warning",
+      "title": "Required fields checked"
+    },
+    {
+      "detail": "Payment intent plus the validation warning raise the run into the approval path.",
+      "id": "risk",
+      "metric": "risk 57.2 \u00b7 medium",
+      "short": "Risk",
+      "status": "scored",
+      "title": "Risk score computed"
+    },
+    {
+      "detail": "The non-simulation engine pauses before any connector action can execute.",
+      "id": "approval",
+      "metric": "status waiting_approval",
+      "short": "Approve",
+      "status": "paused",
+      "title": "Human approval required"
+    },
+    {
+      "detail": "A separate simulation run shows the accounting action boundary without performing an external write.",
+      "id": "connector",
+      "metric": "accounting_demo \u00b7 dry_run true \u00b7 executed false",
+      "short": "Connector",
+      "status": "dry-run",
+      "title": "Safe connector preview"
+    },
+    {
+      "detail": "The workflow events, node outputs, approval state, and model boundary remain available for review.",
+      "id": "audit",
+      "metric": "13 engine events \u00b7 6 gated nodes",
+      "short": "Audit",
+      "status": "traceable",
+      "title": "Replayable evidence recorded"
+    }
+  ],
+  "fixture": "workflowops-invoice-approval-9001",
+  "model": {
+    "claim_boundary": "Deterministic rule-based demo provider; not a production accuracy benchmark.",
+    "confidence": 0.82,
+    "deterministic": true,
+    "implementation": "backend/app/llm/mock_provider.py::MockLLMProvider",
+    "name": "workflowops-mock-provider",
+    "provider": "mock",
+    "reference_output": {
+      "amount": 5000.0,
+      "confidence": 0.78,
+      "currency": "USD",
+      "due_date": "2026-08-01",
+      "invoice_number": "INV-9001",
+      "tax": 0.0,
+      "vendor_name": "Acme Supplies"
+    }
+  },
+  "schema_version": "1.0",
+  "source": {
+    "action_type": "payment_export",
+    "bytes": 258,
+    "filename": "synthetic_invoice_INV-9001.txt",
+    "path": "demo_data/animation/synthetic_invoice_approval.json",
+    "sha256": "d24fcaf390f336784e19ef50fb32ad0519d66fc94746c85e581110cd9726d76c",
+    "synthetic": true
+  },
+  "workflow": {
+    "audit_event_names": [
+      "run_started",
+      "ingest",
+      "ingest",
+      "classify",
+      "classify",
+      "extract",
+      "extract",
+      "validate",
+      "validate",
+      "risk",
+      "risk",
+      "approval",
+      "approval"
+    ],
+    "engine": "backend/app/workflows/engine.py::WorkflowEngine",
+    "gated_nodes_completed": 6,
+    "gated_status": "waiting_approval",
+    "simulation_nodes_completed": 9,
+    "simulation_preview_status": "completed",
+    "template": "invoice_approval"
+  }
+}

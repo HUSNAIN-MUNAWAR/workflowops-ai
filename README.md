@@ -38,6 +38,16 @@ The screenshots below are real Chromium captures from the running FastAPI and Ne
 |---|---|
 | ![Reliability](sample_outputs/screenshots/reliability_live_browser.png) | ![Templates](sample_outputs/screenshots/templates_live_browser.png) |
 
+## Synthetic approval reference reel
+
+The repository includes a reproducible animation of the invoice approval safety path at [`frontend/public/animation/workflow-approval-reel.html`](frontend/public/animation/workflow-approval-reel.html). It is generated from the real `WorkflowEngine`, deterministic mock provider, redaction, validation, approval, and safe connector-preview boundaries.
+
+```bash
+PYTHONPATH=backend python scripts/generate_workflow_animation.py
+```
+
+The source checksum, model reference, stable workflow outputs, and scene metrics are recorded in [`docs/animation/workflow_approval_sequence.json`](docs/animation/workflow_approval_sequence.json). The fixture and provider are synthetic/deterministic, and the connector preview is explicitly `dry_run`; no payment or external write is performed.
+
 ## Architecture
 
 ```mermaid

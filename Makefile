@@ -1,5 +1,5 @@
 
-.PHONY: help install setup db-upgrade db-downgrade db-reset seed demo-reset test validate dev worker docker-up docker-down docker-logs docker-config reports screenshots screenshots-live frontend-check backend-check e2e clean
+.PHONY: help install setup db-upgrade db-downgrade db-reset seed demo-reset test validate animation dev worker docker-up docker-down docker-logs docker-config reports screenshots screenshots-live frontend-check backend-check e2e clean
 help:
 	@echo "WorkflowOps AI commands: install, db-upgrade, seed, dev, worker, test, validate, frontend-check, e2e, reports, screenshots, docker-up"
 install setup:
@@ -30,6 +30,8 @@ validate:
 	PYTHONPATH=backend python scripts/validate_reliability_tests.py
 	PYTHONPATH=backend python scripts/validate_security_controls.py
 	PYTHONPATH=backend python scripts/validate_document_extraction.py
+animation:
+	PYTHONPATH=backend python scripts/generate_workflow_animation.py
 reports:
 	PYTHONPATH=backend python scripts/generate_demo_reports.py
 screenshots:
